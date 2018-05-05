@@ -19,3 +19,4 @@ sandbox/build/libs/sandbox.jar
 sandbox/build/tmp/jar/MANIFEST.MF
 sandbox/build/scripts/sandbox
 sandbox/build/scripts/sandbox.bat
+.idea/workspace.xml
