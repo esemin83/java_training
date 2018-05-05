@@ -12,3 +12,10 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+*.class
+sandbox/build/distributions/sandbox.tar
+*.zip
+sandbox/build/libs/sandbox.jar
+*.bat
+sandbox/build/tmp/jar/MANIFEST.MF
+sandbox/build/scripts/sandbox
