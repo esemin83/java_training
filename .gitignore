@@ -16,6 +16,6 @@ gradle-app.setting
 sandbox/build/distributions/sandbox.tar
 *.zip
 sandbox/build/libs/sandbox.jar
-*.bat
 sandbox/build/tmp/jar/MANIFEST.MF
 sandbox/build/scripts/sandbox
+sandbox/build/scripts/sandbox.bat
