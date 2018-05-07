@@ -9,7 +9,7 @@ public class PointTests {
   public void testDistance() {
     Point a1 = new Point(341, 500);
     Point a2 = new Point(201, 765);
-    double dist = a1.distance(a1, a2);
+    double dist = a1.distance(a2);
     Assert.assertEquals(dist, 299.7081914129142);
 
   }
@@ -18,7 +18,7 @@ public class PointTests {
   public void testDistanceNew() {
     Point a1 = new Point(426, 982);
     Point a2 = new Point(753, 855);
-    double dist = a1.distance(a1, a2);
+    double dist = a1.distance(a2);
     Assert.assertEquals(dist, 350.7962371519968);
 
   }
@@ -27,7 +27,7 @@ public class PointTests {
   public void testDistanceOne() {
     Point a1 = new Point(-7, 56);
     Point a2 = new Point(0, -795);
-    double dist = a1.distance(a1, a2);
+    double dist = a1.distance(a2);
     Assert.assertEquals(dist, 851.0287891722583);
 
   }
@@ -36,7 +36,7 @@ public class PointTests {
   public void testDistanceOneMore() {
     Point a1 = new Point(0, 5);
     Point a2 = new Point(0, 5);
-    double dist = a1.distance(a1, a2);
+    double dist = a1.distance(a2);
     Assert.assertEquals(dist, 0.0);
 
   }
