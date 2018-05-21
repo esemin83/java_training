@@ -8,10 +8,9 @@ public class GroupCreationTests extends TestBase {
   @Test
   public void testGroupCreation() {
     app.getNavigationHelper().goToGroupPage();
-    app.getGroupHelper().createGroup(new GroupData("group_1", null, null));
-    //app.getGroupHelper().initGroupCreation();
-    //app.getGroupHelper().fillGroupForm(new GroupData("group_1", null, null));
-    //app.getGroupHelper().submitGroupCreation();
+    app.getGroupHelper().createGroup(new GroupData("group_modified", null, null));
+    // Элемент не успевает отрисоваться в Chrome?
     //app.getGroupHelper().returnToGroupPage();
+    app.getNavigationHelper().goToGroupPage();
   }
 }
