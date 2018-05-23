@@ -25,13 +25,12 @@ public class ApplicationManager {
 
   public void init() {
     if (browser.equals(BrowserType.FIREFOX)) {
-      wd = wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("F:/tools/Firefox.45.9.0ESR/firefox.exe"));
+      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("F:/tools/Firefox.45.9.0ESR/firefox.exe"));
     } else if (browser.equals(BrowserType.CHROME)) {
       wd = new ChromeDriver();
     } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();
     }
-    //wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("F:/tools/Firefox.45.9.0ESR/firefox.exe"));
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     sessionHelper = new SessionHelper(wd);
     groupHelper = new GroupHelper(wd);
