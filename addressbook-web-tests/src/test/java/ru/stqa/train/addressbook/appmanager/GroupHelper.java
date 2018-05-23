@@ -44,10 +44,12 @@ public class GroupHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public String getGroupName() {
+  public String getGroupNameFromUI() {
     String name;
+    //groupData.getName() =
     name = wd.findElement(By.cssSelector("input[name='selected[]']")).getAttribute("title");
     String res[] = name.split("[()]");
+    //groupData.getName();
     return res[1];
 
   }
