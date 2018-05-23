@@ -8,7 +8,7 @@ public class GroupGetNameTest extends TestBase{
   public void testGetGroupName(){
     app.getNavigationHelper().goToGroupPage();
     String groupName;
-    groupName = app.getGroupHelper().getGroupName();
+    groupName = app.getGroupHelper().getGroupNameFromUI();
     System.out.println(groupName);
   }
 }

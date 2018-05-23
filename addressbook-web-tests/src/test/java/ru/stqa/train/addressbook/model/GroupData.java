@@ -1,7 +1,7 @@
 package ru.stqa.train.addressbook.model;
 
 public class GroupData {
-  private final String name;
+  private String name;
   private final String header;
   private final String footer;
 
@@ -21,5 +21,9 @@ public class GroupData {
 
   public String getFooter() {
     return footer;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }

@@ -21,11 +21,27 @@ public class ContactCreationTests extends TestBase {
     if (!app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData(groupName, null, null));
     } else {
-      groupName = app.getGroupHelper().getGroupName();
+      groupName = app.getGroupHelper().getGroupNameFromUI();
     }
     app.getContactHelper().createContact(new ContactData("First name", "Middle", "Last name",
             "Address new", "84953864656",
             "example@mail.com", groupName), true);
+    app.getNavigationHelper().goToHomePage();
+
+  }
+
+  @Test
+  public void testContactCreation1() {
+    GroupData groupData = new GroupData("some_group", null, null);
+    app.getNavigationHelper().goToGroupPage();
+    if (!app.getGroupHelper().isThereAGroup()) {
+      app.getGroupHelper().createGroup(new GroupData(groupData.getName(), null, null));
+    } else {
+      groupData.setName(app.getGroupHelper().getGroupNameFromUI());
+    }
+    app.getContactHelper().createContact(new ContactData("First name", "Middle", "Last name",
+            "Address new", "84953864656",
+            "example@mail.com", groupData.getName()), true);
     app.getNavigationHelper().goToHomePage();
 
   }
