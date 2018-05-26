@@ -1,5 +1,6 @@
 package ru.stqa.train.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.train.addressbook.model.ContactData;
 import ru.stqa.train.addressbook.model.GroupData;
@@ -8,14 +9,18 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() {
+    int before = app.getContactHelper().getContactCountUI();
     app.getContactHelper().createContact(new ContactData("First name", "Middle", "Last name",
             "Address new", "84953864656",
             "example@mail.com", "group_new"), false);
     app.getNavigationHelper().goToHomePage();
+    int after = app.getContactHelper().getContactCountUI();
+    Assert.assertEquals(after, before + 1);
   }
 
   @Test
   public void testContactCreation0() {
+    int before = app.getContactHelper().getContactCountUI();
     String groupName = "some_group";
     app.getNavigationHelper().goToGroupPage();
     if (!app.getGroupHelper().isThereAGroup()) {
@@ -27,11 +32,13 @@ public class ContactCreationTests extends TestBase {
             "Address new", "84953864656",
             "example@mail.com", groupName), true);
     app.getNavigationHelper().goToHomePage();
-
+    int after = app.getContactHelper().getContactCountUI();
+    Assert.assertEquals(after, before + 1);
   }
 
   @Test
   public void testContactCreation1() {
+    int before = app.getContactHelper().getContactCountUI();
     GroupData groupData = new GroupData("some_group", null, null);
     app.getNavigationHelper().goToGroupPage();
     if (!app.getGroupHelper().isThereAGroup()) {
@@ -43,6 +50,7 @@ public class ContactCreationTests extends TestBase {
             "Address new", "84953864656",
             "example@mail.com", groupData.getName()), true);
     app.getNavigationHelper().goToHomePage();
-
+    int after = app.getContactHelper().getContactCountUI();
+    Assert.assertEquals(after, before + 1);
   }
 }
