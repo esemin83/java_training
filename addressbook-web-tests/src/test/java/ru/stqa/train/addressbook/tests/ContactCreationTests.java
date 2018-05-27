@@ -41,19 +41,22 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation1() {
-    //int before = app.getContactHelper().getContactCountUI();
     List<ContactData> before = app.getContactHelper().getContactList();
+
     GroupData groupData = new GroupData("some_group", null, null);
     ContactData contact = new ContactData("First name", "Middle", "Last name",
             "Address new", "84953864656",
             "example@mail.com", groupData.getName());
+
     app.getNavigationHelper().goToGroupPage();
+
     if (!app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData(groupData.getName(), null, null));
     } else {
-      groupData.setName(app.getGroupHelper().getGroupNameFromUI());
+      contact.setGroup(app.getGroupHelper().getGroupNameFromUI());
     }
-    app.getContactHelper().createContact(contact, false);
+
+    app.getContactHelper().createContact(contact, true);
     app.getNavigationHelper().goToHomePage();
 
     List<ContactData> after = app.getContactHelper().getContactList();
