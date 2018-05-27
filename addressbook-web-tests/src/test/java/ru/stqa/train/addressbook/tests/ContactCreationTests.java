@@ -51,7 +51,7 @@ public class ContactCreationTests extends TestBase {
     app.getNavigationHelper().goToGroupPage();
 
     if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData(groupData.getName(), null, null));
+      app.getGroupHelper().createGroup(groupData);
     } else {
       contact.setGroup(app.getGroupHelper().getGroupNameFromUI());
     }
