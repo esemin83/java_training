@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.stqa.train.addressbook.model.ContactData;
 import ru.stqa.train.addressbook.model.GroupData;
 
+import java.util.List;
+
 public class ContactCreationTests extends TestBase {
 
   @Test
@@ -38,7 +40,8 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation1() {
-    int before = app.getContactHelper().getContactCountUI();
+    //int before = app.getContactHelper().getContactCountUI();
+    List<ContactData> before = app.getContactHelper().getContactList();
     GroupData groupData = new GroupData("some_group", null, null);
     app.getNavigationHelper().goToGroupPage();
     if (!app.getGroupHelper().isThereAGroup()) {
@@ -50,7 +53,8 @@ public class ContactCreationTests extends TestBase {
             "Address new", "84953864656",
             "example@mail.com", groupData.getName()), true);
     app.getNavigationHelper().goToHomePage();
-    int after = app.getContactHelper().getContactCountUI();
-    Assert.assertEquals(after, before + 1);
+    //int after = app.getContactHelper().getContactCountUI();
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() + 1);
   }
 }
