@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBase {
     }
     app.getNavigationHelper().goToHomePage();
     int before = app.getContactHelper().getContactCountUI();
-    app.getContactHelper().initContactModification();
+    app.getContactHelper().initContactModification(0);
     app.getContactHelper().fillContactForm(new ContactData("First name modified", "Middle modified",
             "Last name modified", "Address modified", "84951111111",
             "example_modified@mail.com", null), false);
