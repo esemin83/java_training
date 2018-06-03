@@ -4,11 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import ru.stqa.train.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class ContactHelper extends HelperBase {
@@ -31,9 +32,6 @@ public class ContactHelper extends HelperBase {
 
     if(creation){
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      return;
-      //Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
@@ -45,6 +43,10 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
+  public void selectContactById(ContactData contact) {
+    wd.findElement(By.cssSelector("input[value='" + contact.getId() + "']")).click();
+  }
+
   public void deleteSelectedContact() {
     click(By.cssSelector("input[value='Delete']"));
     wd.switchTo().alert().accept();
@@ -52,6 +54,10 @@ public class ContactHelper extends HelperBase {
 
   public void initContactModification(int index) {
     wd.findElements(By.cssSelector("img[title='Edit']")).get(index).click();
+  }
+
+  public void initContactModificationById(ContactData contact) {
+    wd.findElement(By.cssSelector("a[href$='" + contact.getId() + "'] img[title='Edit']")).click();
   }
 
   public void submitContactModification() {
@@ -85,8 +91,8 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
-  public List<ContactData> all() {
-    List<ContactData> contacts = new ArrayList<>();
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement element: elements){
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
@@ -103,8 +109,13 @@ public class ContactHelper extends HelperBase {
     deleteSelectedContact();
   }
 
-  public void modify(int index, ContactData contact) {
-    initContactModification(index);
+  public void delete(ContactData contact) {
+    selectContactById(contact);
+    deleteSelectedContact();
+  }
+
+  public void modify(ContactData contact) {
+    initContactModificationById(contact);
     fillContactForm(contact, false);
     submitContactModification();
   }
