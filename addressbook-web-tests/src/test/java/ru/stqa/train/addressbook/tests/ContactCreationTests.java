@@ -14,15 +14,14 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation1() {
     List<ContactData> before = app.contact().List();
     GroupData groupData = new GroupData().withName("some_group");
-    ContactData contact = new ContactData("First name", "Middle", "Last name",
-            "Address new", "84953864656",
-            "example@mail.com", groupData.getName());
+    ContactData contact = new ContactData().withFirstname("First name").withMiddlename("Middle").withLastname("Last name")
+            .withAddress("Address new").withPhoneHome("84953864656").withEmailFirst("example@mail.com").withGroup(groupData.getName());
     app.goTo().GroupPage();
 
     if (app.group().List().size() == 0) {
       app.group().create(groupData);
     } else {
-      contact.setGroup(app.group().getGroupNameFromUI());
+      contact.withGroup(app.group().getGroupNameFromUI());
     }
 
     app.contact().create(contact, true);

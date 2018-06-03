@@ -3,27 +3,14 @@ package ru.stqa.train.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private int id;
-  private final String firstname;
-  private final String middlename;
-  private final String lastname;
-  private final String address;
-  private final String phoneHome;
-  private final String emailFirst;
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String middlename;
+  private String lastname;
+  private String address;
+  private String phoneHome;
+  private String emailFirst;
   private String group;
-
-
-  public ContactData(int id, String firstname, String middlename, String lastname, String address, String phoneHome,
-                     String emailFirst, String group) {
-    this.id = id;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.address = address;
-    this.phoneHome = phoneHome;
-    this.emailFirst = emailFirst;
-    this.group = group;
-  }
 
   @Override
   public String toString() {
@@ -39,16 +26,22 @@ public class ContactData {
             '}';
   }
 
-  public ContactData(String firstname, String middlename, String lastname, String address, String phoneHome,
-                     String emailFirst, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.address = address;
-    this.phoneHome = phoneHome;
-    this.emailFirst = emailFirst;
-    this.group = group;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastname, that.lastname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(firstname, lastname);
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getFirstname() {
@@ -79,26 +72,45 @@ public class ContactData {
     return group;
   }
 
-  public int getId() {
-    return id;
+
+
+  public ContactData withId(int id){
+    this.id = id;
+    return this;
   }
 
-  public void setGroup(String group) {
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withPhoneHome(String phoneHome) {
+    this.phoneHome = phoneHome;
+    return this;
+  }
+
+  public ContactData withEmailFirst(String emailFirst) {
+    this.emailFirst = emailFirst;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
     this.group = group;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(firstname, lastname);
+    return this;
   }
 }
