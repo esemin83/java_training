@@ -50,10 +50,8 @@ public class GroupHelper extends HelperBase {
 
   public String getGroupNameFromUI() {
     String name;
-    //groupData.getName() =
     name = wd.findElement(By.cssSelector("input[name='selected[]']")).getAttribute("title");
     String res[] = name.split("[()]");
-    //groupData.getName();
     return res[1];
 
   }
@@ -93,8 +91,7 @@ public class GroupHelper extends HelperBase {
     for (WebElement element: elements){
       int id = Integer.parseInt(element.findElement(By.name("selected[]")).getAttribute("value"));
       String name = element.getText();
-      GroupData group = new GroupData(id, name, null, null);
-      groups.add(group);
+      groups.add(new GroupData().withId(id).withName(name));
     }
     return groups;
   }

@@ -13,7 +13,7 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
     app.goTo().GroupPage();
     List<GroupData> before = app.group().List();
-    GroupData group = new GroupData("group_new1", null, null);
+    GroupData group = new GroupData().withName("group_new1");
     app.group().create(group);
     app.goTo().GroupPage();
     List<GroupData> after = app.group().List();

@@ -10,39 +10,10 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test(enabled = false)
-  public void testContactCreation() {
-    int before = app.contact().getContactCountUI();
-    app.contact().create(new ContactData("First name", "Middle", "Last name",
-            "Address new", "84953864656",
-            "example@mail.com", "group_new"), false);
-    app.goTo().HomePage();
-    int after = app.contact().getContactCountUI();
-    Assert.assertEquals(after, before + 1);
-  }
-
-  @Test(enabled = false)
-  public void testContactCreation0() {
-    int before = app.contact().getContactCountUI();
-    String groupName = "some_group";
-    app.goTo().GroupPage();
-    if (!app.group().isThereAGroup()) {
-      app.group().create(new GroupData(groupName, null, null));
-    } else {
-      groupName = app.group().getGroupNameFromUI();
-    }
-    app.contact().create(new ContactData("First name", "Middle", "Last name",
-            "Address new", "84953864656",
-            "example@mail.com", groupName), true);
-    app.goTo().HomePage();
-    int after = app.contact().getContactCountUI();
-    Assert.assertEquals(after, before + 1);
-  }
-
   @Test
   public void testContactCreation1() {
     List<ContactData> before = app.contact().List();
-    GroupData groupData = new GroupData("some_group", null, null);
+    GroupData groupData = new GroupData().withName("some_group");
     ContactData contact = new ContactData("First name", "Middle", "Last name",
             "Address new", "84953864656",
             "example@mail.com", groupData.getName());
