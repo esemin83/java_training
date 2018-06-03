@@ -9,17 +9,17 @@ public class testMethods extends TestBase{
 
   @Test(enabled = false)
   public void testGetGroupName(){
-    app.getNavigationHelper().goToGroupPage();
+    app.goTo().GroupPage();
     String groupName;
-    groupName = app.getGroupHelper().getGroupNameFromUI();
+    groupName = app.group().getGroupNameFromUI();
     System.out.println("groupName = " + groupName);
   }
 
 
   @Test
   public void testGetContactList() {
-    app.getNavigationHelper().goToHomePage();
-    List<ContactData> contactList = app.getContactHelper().getContactList();
+    app.goTo().HomePage();
+    List<ContactData> contactList = app.contact().List();
     System.out.println("contactList = " + contactList.toString());
     //System.out.println(contactList);
   }
