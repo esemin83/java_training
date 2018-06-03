@@ -18,7 +18,7 @@ public class ContactCreationTests extends TestBase {
             .withAddress("Address new").withPhoneHome("84953864656").withEmailFirst("example@mail.com").withGroup(groupData.getName());
     app.goTo().GroupPage();
 
-    if (app.group().List().size() == 0) {
+    if (app.group().all().size() == 0) {
       app.group().create(groupData);
     } else {
       contact.withGroup(app.group().getGroupNameFromUI());
