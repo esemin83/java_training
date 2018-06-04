@@ -7,9 +7,7 @@ import ru.stqa.train.addressbook.model.GroupData;
 import ru.stqa.train.addressbook.model.Groups;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
