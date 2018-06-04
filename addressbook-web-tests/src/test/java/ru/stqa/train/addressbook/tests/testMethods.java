@@ -18,9 +18,9 @@ public class testMethods extends TestBase{
 
   @Test
   public void testGetContactList() {
-    app.goTo().HomePage();
-    List<ContactData> contactList = app.contact().List();
-    System.out.println("contactList = " + contactList.toString());
+    //app.goTo().HomePage();
+    //List<ContactData> contactList = app.contact().List();
+    //System.out.println("contactList = " + contactList.toString());
     //System.out.println(contactList);
   }
 }
