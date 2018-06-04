@@ -27,7 +27,11 @@ public class ContactHelper extends HelperBase {
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getPhoneHome());
+    type(By.name("mobile"), contactData.getPhoneMobile());
+    type(By.name("work"), contactData.getPhoneWork());
     type(By.name("email"), contactData.getEmailFirst());
+    type(By.name("email2"), contactData.getEmailSecond());
+    type(By.name("email3"), contactData.getEmailThird());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -56,7 +60,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void initContactModificationById(ContactData contact) {
-    wd.findElement(By.cssSelector("a[href$='" + contact.getId() + "'] img[title='Edit']")).click();
+    wd.findElement(By.cssSelector(String.format("a[href$='%s'] img[title='Edit']", contact.getId()))).click();
   }
 
   public void submitContactModification() {
@@ -78,7 +82,7 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String firstName = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
+      contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
     }
 
     return contacts;
@@ -96,10 +100,34 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String firstName = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      contactCache.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
+      String address = element.findElement(By.cssSelector("td:nth-child(4)")).getText();
+      String allPhones = element.findElement(By.cssSelector("td:nth-child(6)")).getText();
+      String allEmails = element.findElement(By.cssSelector("td:nth-child(5)")).getText();
+      contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName).withAddress(address)
+              .withAllPhones(allPhones).withAllEmails(allEmails));
     }
 
     return new Contacts(contactCache);
+  }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact);
+    String firstname = wd.findElement(By.cssSelector("input[name='firstname']")).getAttribute("value");
+    String lastname = wd.findElement(By.cssSelector("input[name='lastname']")).getAttribute("value");
+    String address = wd.findElement(By.cssSelector("textarea[name='address']")).getAttribute("value");
+    String phoneHome = wd.findElement(By.cssSelector("input[name='home']")).getAttribute("value");
+    String phoneMobile = wd.findElement(By.cssSelector("input[name='mobile']")).getAttribute("value");
+    String phoneWork = wd.findElement(By.cssSelector("input[name='work']")).getAttribute("value");
+
+    String emailFirst = wd.findElement(By.cssSelector("input[name='email']")).getAttribute("value");
+    String emailSecond = wd.findElement(By.cssSelector("input[name='email2']")).getAttribute("value");
+    String emailThird = wd.findElement(By.cssSelector("input[name='email3']")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phoneHome)
+            .withPhoneMobile(phoneMobile).withPhoneWork(phoneWork).withEmailFirst(emailFirst).withEmailSecond(emailSecond)
+            .withEmailThird(emailThird);
+
+
   }
 
   public void delete(int index) {
