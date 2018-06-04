@@ -8,9 +8,7 @@ import ru.stqa.train.addressbook.model.ContactData;
 import ru.stqa.train.addressbook.model.Contacts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class ContactHelper extends HelperBase {
@@ -31,7 +29,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactData.getPhoneHome());
     type(By.name("email"), contactData.getEmailFirst());
 
-    if(creation){
+    if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     }
   }
@@ -65,12 +63,6 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void create(ContactData contact, boolean creation) {
-    initContactCreation();
-    fillContactForm(contact, creation);
-    submitContactCreation();
-  }
-
   public boolean isThereAContact() {
     return isElementPresent(By.cssSelector("input[name='selected[]']"));
   }
@@ -82,7 +74,7 @@ public class ContactHelper extends HelperBase {
   public List<ContactData> List() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
-    for (WebElement element: elements){
+    for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String firstName = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
@@ -92,17 +84,22 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+  private Contacts contactCache = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
-    for (WebElement element: elements){
+    for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String firstName = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
+      contactCache.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
     }
 
-    return contacts;
+    return new Contacts(contactCache);
   }
 
   public void delete(int index) {
@@ -110,14 +107,23 @@ public class ContactHelper extends HelperBase {
     deleteSelectedContact();
   }
 
+  public void create(ContactData contact, boolean creation) {
+    initContactCreation();
+    fillContactForm(contact, creation);
+    submitContactCreation();
+    contactCache = null;
+  }
+
   public void delete(ContactData contact) {
     selectContactById(contact);
     deleteSelectedContact();
+    contactCache = null;
   }
 
   public void modify(ContactData contact) {
     initContactModificationById(contact);
     fillContactForm(contact, false);
     submitContactModification();
+    contactCache = null;
   }
 }
