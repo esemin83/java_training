@@ -67,7 +67,7 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.cssSelector("input[name='selected[]']"));
   }
 
-  public int getContactCountUI() {
+  public int countUI() {
     return wd.findElements(By.cssSelector("input[name='selected[]']")).size();
   }
 

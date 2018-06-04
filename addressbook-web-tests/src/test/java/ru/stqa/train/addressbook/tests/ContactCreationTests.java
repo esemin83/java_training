@@ -24,9 +24,9 @@ public class ContactCreationTests extends TestBase {
     }
     app.contact().create(contact, true);
     app.goTo().HomePage();
+    assertThat(app.contact().countUI(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
     assertThat(after , equalTo(before.withAdded(
             contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    assertThat(after.size(), equalTo(before.size() + 1));
   }
 }
