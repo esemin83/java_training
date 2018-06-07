@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import ru.stqa.train.addressbook.model.ContactData;
 import ru.stqa.train.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.List;
 
 public class testMethods extends TestBase{
@@ -39,5 +40,13 @@ public class testMethods extends TestBase{
     Contacts list = app.contact().all();
     System.out.println("FromUI = " + list.toString());
     //System.out.println(contactList);
+  }
+  @Test
+  public void getAbsPath() {
+    File someFile = new File(".");
+    System.out.println(someFile.getAbsolutePath());
+    File file = new File("src\\test\\resources\\profile-512.jpg");
+    System.out.println(file.getAbsolutePath());
+    System.out.println(file.exists());
   }
 }

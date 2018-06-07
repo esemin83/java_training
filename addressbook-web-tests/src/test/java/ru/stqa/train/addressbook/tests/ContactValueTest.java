@@ -22,6 +22,7 @@ public class ContactValueTest extends TestBase {
               .withPhoneHome("+8(495)1111111")
               .withPhoneMobile("4-35-4543")
               .withPhoneWork("1 2123 334 54")
+              .withEmailFirst("example!45@mail.com")
               //.withEmailSecond("exads11sa=_e!45@mail.com")
               .withEmailThird("741##8900@mail.com"), false);
     }

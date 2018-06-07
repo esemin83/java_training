@@ -32,6 +32,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("email"), contactData.getEmailFirst());
     type(By.name("email2"), contactData.getEmailSecond());
     type(By.name("email3"), contactData.getEmailThird());
+    attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -61,6 +62,15 @@ public class ContactHelper extends HelperBase {
 
   public void initContactModificationById(ContactData contact) {
     wd.findElement(By.cssSelector(String.format("a[href$='%s'] img[title='Edit']", contact.getId()))).click();
+  }
+
+  public void openContactDetailsById(ContactData contact) {
+    wd.findElement(By.xpath(String.format("//input[@id='%s']/../..//img[@title='Details']", contact.getId()))).click();
+  }
+
+  public Boolean checkPicIsAttached(ContactData contact) {
+    openContactDetailsById(contact);
+    return isElementPresent(By.xpath("//img[@alt='Embedded Image']"));
   }
 
   public void submitContactModification() {
