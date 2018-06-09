@@ -40,17 +40,21 @@ public class ContactDataGenerator {
   private void save(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts) {
-      writer.write(String.format("%s;%s\n", contact.getFirstname(), contact.getLastname()));
+      writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
+              contact.getAddress(), contact.getEmailFirst(), contact.getPhoneHome()));
     }
     writer.close();
   }
 
   private List<ContactData> generateContacts(int count) {
-    List<ContactData> groups = new ArrayList<ContactData>();
+    List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
-      groups.add(new ContactData().withFirstName(String.format("FirstName %s", i))
-              .withLastName(String.format("LastName %s", i)));
+      contacts.add(new ContactData().withFirstName(String.format("FirstName %s", i))
+              .withLastName(String.format("LastName %s", i))
+              .withAddress(String.format("Address %s", i))
+              .withEmailFirst(String.format("Email%s@mail.com", i))
+              .withPhoneHome(String.format("8495000000%s", i)));
     }
-    return groups;
+    return contacts;
   }
 }
