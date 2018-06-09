@@ -34,7 +34,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void deleteSelectedGroups() {
-    click(By.xpath("//div[@id='content']/form/input[5]"));
+    click(By.name("delete"));
   }
 
   public void selectGroup(int index) {
@@ -81,6 +81,15 @@ public class GroupHelper extends HelperBase {
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
+    groupCache = null;
+    returnToGroupPage();
+  }
+
+  public void deleteAllGroups(int size) {
+    for (int i = 0; i < size; i++){
+      selectGroup(i);
+    }
+    deleteSelectedGroups();
     groupCache = null;
     returnToGroupPage();
   }

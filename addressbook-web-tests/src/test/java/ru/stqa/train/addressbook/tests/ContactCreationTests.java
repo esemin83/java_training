@@ -1,6 +1,5 @@
 package ru.stqa.train.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.train.addressbook.model.ContactData;
 import ru.stqa.train.addressbook.model.Contacts;
