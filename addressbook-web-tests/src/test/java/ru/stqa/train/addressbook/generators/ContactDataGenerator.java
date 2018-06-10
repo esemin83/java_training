@@ -3,6 +3,8 @@ package ru.stqa.train.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ru.stqa.train.addressbook.model.ContactData;
 
 import java.io.File;
@@ -17,8 +19,11 @@ public class ContactDataGenerator {
   @Parameter(names = "-c", description = "contact count")
   public int count;
 
-  @Parameter(names = "-f", description = "target file")
+  @Parameter(names = "-t", description = "target file")
   public String file;
+
+  @Parameter(names = "-f", description = "Data format")
+  public String format;
 
 
   public static void main(String... args) throws IOException {
@@ -34,10 +39,24 @@ public class ContactDataGenerator {
 
   private void run() throws IOException {
     List<ContactData> contacts = generateContacts(count);
-    save(contacts, new File(file));
+    if (format.equals("csv")) {
+      saveAsCSV(contacts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJSON(contacts, new File(file));
+    } else {
+      System.out.println("Unrecognized format");
+    }
   }
 
-  private void save(List<ContactData> contacts, File file) throws IOException {
+  private void saveAsJSON(List<ContactData> contacts, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    String json = gson.toJson(contacts);
+    Writer writer = new FileWriter(file);
+    writer.write(json);
+    writer.close();
+  }
+
+  private void saveAsCSV(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts) {
       writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
