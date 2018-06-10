@@ -1,3 +1,26 @@
-FirstName 4;LastName 4;Address 4;Email4@mail.com;84950000004
-FirstName 7;LastName 7;Address 7;Email7@mail.com;84950000007
-FirstName 8;LastName 8;Address 8;Email8@mail.com;84950000008
+<list>
+  <ru.stqa.train.addressbook.model.GroupData>
+    <id>2147483647</id>
+    <name>group name 0</name>
+    <header>group header 0</header>
+    <footer>group footer 0</footer>
+  </ru.stqa.train.addressbook.model.GroupData>
+  <ru.stqa.train.addressbook.model.GroupData>
+    <id>2147483647</id>
+    <name>group name 1</name>
+    <header>group header 1</header>
+    <footer>group footer 1</footer>
+  </ru.stqa.train.addressbook.model.GroupData>
+  <ru.stqa.train.addressbook.model.GroupData>
+    <id>2147483647</id>
+    <name>group name 2</name>
+    <header>group header 2</header>
+    <footer>group footer 2</footer>
+  </ru.stqa.train.addressbook.model.GroupData>
+  <ru.stqa.train.addressbook.model.GroupData>
+    <id>2147483647</id>
+    <name>group name 3</name>
+    <header>group header 3</header>
+    <footer>group footer 3</footer>
+  </ru.stqa.train.addressbook.model.GroupData>
+</list>
