@@ -12,12 +12,5 @@
     "address": "Address 1",
     "phoneHome": "84950000001",
     "emailFirst": "Email1@mail.com"
-  },
-  {
-    "firstname": "FirstName 2",
-    "lastname": "LastName 2",
-    "address": "Address 2",
-    "phoneHome": "84950000002",
-    "emailFirst": "Email2@mail.com"
   }
 ]

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.train.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-06-11T16:15:30" hostname="saymonPC" time="0.722">
+  <properties/>
+  <testcase name="testGroupModification1" classname="ru.stqa.train.addressbook.tests.GroupModificationTests" time="0.722"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

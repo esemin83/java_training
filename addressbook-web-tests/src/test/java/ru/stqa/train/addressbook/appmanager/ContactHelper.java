@@ -36,6 +36,8 @@ public class ContactHelper extends HelperBase {
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    } else {
+      return;
     }
   }
 
@@ -162,6 +164,14 @@ public class ContactHelper extends HelperBase {
     initContactModificationById(contact);
     fillContactForm(contact, false);
     submitContactModification();
+    contactCache = null;
+  }
+
+  public void deleteAll(int size) {
+    for (int i = 0; i < size; i++){
+      selectContact(i);
+    }
+    deleteSelectedContact();
     contactCache = null;
   }
 }

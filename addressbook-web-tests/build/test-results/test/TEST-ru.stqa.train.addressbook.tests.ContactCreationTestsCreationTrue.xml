@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.train.addressbook.tests.ContactCreationTestsCreationTrue" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-06-11T15:58:39" hostname="saymonPC" time="4.637">
+  <properties/>
+  <testcase name="testContactCreationTrue" classname="ru.stqa.train.addressbook.tests.ContactCreationTestsCreationTrue" time="4.637"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
