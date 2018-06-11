@@ -40,14 +40,6 @@ public class ContactCreationTests extends TestBase {
   @Test(dataProvider = "contactsFromFileJSON")
   public void testContactCreation1(ContactData contact) {
     Contacts before = app.contact().all();
-    //GroupData groupData = new GroupData().withName("some_group");
-    //app.goTo().GroupPage();
-    //if (app.group().all().size() == 0) {
-    //  app.group().create(groupData);
-    //} else {
-    //  contact.withGroup(app.group().getGroupNameFromUI());
-    //  app.goTo().HomePage();
-    //}
     app.contact().create(contact, false);
     app.goTo().HomePage();
     assertThat(app.contact().countUI(), equalTo(before.size() + 1));
