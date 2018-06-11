@@ -22,3 +22,4 @@ sandbox/build/scripts/sandbox.bat
 .idea/workspace.xml
 chromedriver.exe
 IEDriverServer.exe
+*.log

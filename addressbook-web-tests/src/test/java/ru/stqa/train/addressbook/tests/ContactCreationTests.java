@@ -2,11 +2,12 @@ package ru.stqa.train.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.train.addressbook.model.ContactData;
 import ru.stqa.train.addressbook.model.Contacts;
-import ru.stqa.train.addressbook.model.GroupData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,7 +21,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
-
 
   @DataProvider
   public Iterator<Object[]> contactsFromFileJSON() throws IOException {
@@ -39,6 +39,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "contactsFromFileJSON")
   public void testContactCreation1(ContactData contact) {
+
     Contacts before = app.contact().all();
     app.contact().create(contact, false);
     app.goTo().HomePage();
@@ -46,7 +47,7 @@ public class ContactCreationTests extends TestBase {
     Contacts after = app.contact().all();
     assertThat(after, equalTo(before.withAdded(
             contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-  }
 
+  }
 
 }
