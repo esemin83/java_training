@@ -14,43 +14,58 @@ public class ContactData {
   @Id
   @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
   @Column(name = "firstname")
   private String firstname;
+
+  @Transient
   private String middlename;
+
   @Expose
   @Column(name = "lastname")
   private String lastname;
+
   @Expose
   @Column(name = "address")
   @Type(type = "text")
   private String address;
+
   @Expose
   @Column(name = "home")
   @Type(type = "text")
   private String phoneHome;
+
   @Column(name = "mobile")
   @Type(type = "text")
   private String phoneMobile;
+
   @Column(name = "work")
   @Type(type = "text")
   private String phoneWork;
+
   @Expose
   @Column(name = "email")
   @Type(type = "text")
   private String emailFirst;
+
   @Column(name = "email2")
   @Type(type = "text")
   private String emailSecond;
+
   @Column(name = "email3")
   @Type(type = "text")
   private String emailThird;
+
   @Transient
   private String group;
+
   @Transient
   private String allPhones;
+
   @Transient
   private String allEmails;
+
   @Transient
   private File photo;
 
@@ -61,7 +76,17 @@ public class ContactData {
     ContactData that = (ContactData) o;
     return id == that.id &&
             Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(phoneHome, that.phoneHome) &&
+            Objects.equals(emailFirst, that.emailFirst) &&
+            Objects.equals(group, that.group);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, firstname, middlename, lastname, address, phoneHome, phoneMobile, phoneWork, emailFirst, emailSecond, emailThird, group);
   }
 
   @Override
@@ -81,13 +106,8 @@ public class ContactData {
             ", group='" + group + '\'' +
             ", allPhones='" + allPhones + '\'' +
             ", allEmails='" + allEmails + '\'' +
+            ", photo=" + photo +
             '}';
-  }
-
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(id, firstname, lastname);
   }
 
   public int getId() {

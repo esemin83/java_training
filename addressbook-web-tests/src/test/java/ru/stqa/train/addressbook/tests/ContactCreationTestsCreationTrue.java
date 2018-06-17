@@ -12,23 +12,24 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTestsCreationTrue extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testContactCreationTrue() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     GroupData groupData = new GroupData().withName("some_group");
-    ContactData contact = new ContactData().withFirstName("First name").withMiddleName("Middle")
+    ContactData contact = new ContactData().withFirstName("First name")
             .withLastName("Last name").withAddress("Address new").withPhoneHome("84953864656")
             .withEmailFirst("example@mail.com").withGroup(groupData.getName());
     app.goTo().GroupPage();
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
       app.group().create(groupData);
     } else {
       contact.withGroup(app.group().getGroupNameFromUI());
+      //contact.withGroup(app.db().groups().iterator().next().getName());
     }
     app.contact().create(contact, true);
     app.goTo().HomePage();
-    assertThat(app.contact().countUI(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    //assertThat(app.contact().countUI(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(
             contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }

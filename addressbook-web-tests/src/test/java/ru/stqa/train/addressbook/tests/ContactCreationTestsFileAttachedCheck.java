@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTestsFileAttachedCheck extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testContactCreationFileAttachedCheck() {
     Contacts before = app.contact().all();
     GroupData groupData = new GroupData().withName("some_group");

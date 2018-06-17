@@ -10,12 +10,12 @@ public class ContactDeletionTestsAll extends TestBase {
 
   @Test
   public void testDeletionContactAll() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     if (before.size() > 0) {
       app.goTo().HomePage();
       app.contact().deleteAll(before.size());
       app.goTo().HomePage();
-      Contacts after = app.contact().all();
+      Contacts after = app.db().contacts();
       assertThat(after.size(), equalTo(0));
     }
   }

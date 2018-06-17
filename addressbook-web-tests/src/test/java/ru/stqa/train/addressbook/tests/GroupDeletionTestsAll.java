@@ -10,10 +10,11 @@ public class GroupDeletionTestsAll extends TestBase {
 
   @Test
   public void testGroupDeletionAll() {
-    Groups before = app.group().all();
+    app.goTo().GroupPage();
+    Groups before = app.db().groups();
     if (before.size() > 0) {
       app.group().deleteAllGroups(before.size());
-      Groups after = app.group().all();
+      Groups after = app.db().groups();
       assertThat(after.size(), equalTo(0));
     }
   }

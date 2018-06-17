@@ -55,5 +55,12 @@ public class testMethods extends TestBase{
   public void getGroupsFromDB() {
     Groups groups = app.db().groups();
     System.out.println(groups);
+    System.out.println(groups.size());
+  }
+  @Test
+  public void getContactsFromDB() {
+    Contacts cnt = app.db().contacts();
+    System.out.println(cnt);
+    System.out.println(cnt.size());
   }
 }
