@@ -138,8 +138,6 @@ public class ContactHelper extends HelperBase {
     return new ContactData().withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phoneHome)
             .withPhoneMobile(phoneMobile).withPhoneWork(phoneWork).withEmailFirst(emailFirst).withEmailSecond(emailSecond)
             .withEmailThird(emailThird);
-
-
   }
 
   public void delete(int index) {

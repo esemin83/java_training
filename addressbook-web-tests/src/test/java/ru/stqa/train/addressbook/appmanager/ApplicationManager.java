@@ -8,7 +8,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -27,14 +26,11 @@ public class ApplicationManager {
 
   public ApplicationManager(String browser) {
     this.browser = browser;
-    //String target = System.getProperty("target", "local");
     properties = new Properties();
-    //properties.load(new FileReader(new File(String.format("src\\test\\resources\\%s.properties", target))));
   }
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
-    //properties = new Properties();
     properties.load(new FileReader(new File(String.format("src\\test\\resources\\%s.properties", target))));
     if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("F:/tools/Firefox.45.9.0ESR/firefox.exe"));
