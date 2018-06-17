@@ -3,6 +3,7 @@ package ru.stqa.train.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.train.addressbook.model.ContactData;
 import ru.stqa.train.addressbook.model.Contacts;
+import ru.stqa.train.addressbook.model.Groups;
 
 import java.io.File;
 import java.util.List;
@@ -48,5 +49,11 @@ public class testMethods extends TestBase{
     File file = new File("src\\test\\resources\\profile-512.jpg");
     System.out.println(file.getAbsolutePath());
     System.out.println(file.exists());
+  }
+
+  @Test
+  public void getGroupsFromDB() {
+    Groups groups = app.db().groups();
+    System.out.println(groups);
   }
 }
