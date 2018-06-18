@@ -5,7 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -58,9 +60,6 @@ public class ContactData {
   private String emailThird;
 
   @Transient
-  private String group;
-
-  @Transient
   private String allPhones;
 
   @Transient
@@ -68,6 +67,11 @@ public class ContactData {
 
   @Transient
   private File photo;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<>();
 
   @Override
   public boolean equals(Object o) {
@@ -79,14 +83,13 @@ public class ContactData {
             Objects.equals(lastname, that.lastname) &&
             Objects.equals(address, that.address) &&
             Objects.equals(phoneHome, that.phoneHome) &&
-            Objects.equals(emailFirst, that.emailFirst) &&
-            Objects.equals(group, that.group);
+            Objects.equals(emailFirst, that.emailFirst);
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hash(id, firstname, middlename, lastname, address, phoneHome, phoneMobile, phoneWork, emailFirst, emailSecond, emailThird, group);
+    return Objects.hash(id, firstname, middlename, lastname, address, phoneHome, phoneMobile, phoneWork, emailFirst, emailSecond, emailThird);
   }
 
   @Override
@@ -103,10 +106,10 @@ public class ContactData {
             ", emailFirst='" + emailFirst + '\'' +
             ", emailSecond='" + emailSecond + '\'' +
             ", emailThird='" + emailThird + '\'' +
-            ", group='" + group + '\'' +
             ", allPhones='" + allPhones + '\'' +
             ", allEmails='" + allEmails + '\'' +
             ", photo=" + photo +
+            ", groups=" + groups +
             '}';
   }
 
@@ -154,8 +157,8 @@ public class ContactData {
     return emailThird;
   }
 
-  public String getGroup() {
-    return group;
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   public String getAllPhones() {
@@ -171,8 +174,7 @@ public class ContactData {
   }
 
 
-
-  public ContactData withId(int id){
+  public ContactData withId(int id) {
     this.id = id;
     return this;
   }
@@ -227,11 +229,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
   public ContactData withAllPhones(String allPhones) {
     this.allPhones = allPhones;
     return this;
@@ -244,6 +241,15 @@ public class ContactData {
 
   public ContactData withPhoto(File photo) {
     this.photo = photo;
+    return this;
+  }
+
+  public void withGroups(Set<GroupData> groups) {
+    this.groups = groups;
+  }
+
+  public ContactData inGroups(GroupData group) {
+    groups.add(group);
     return this;
   }
 }

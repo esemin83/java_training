@@ -14,6 +14,7 @@ public class ContactCreationTestsFileAttachedCheck extends TestBase {
 
   @Test(enabled = false)
   public void testContactCreationFileAttachedCheck() {
+    /*
     Contacts before = app.contact().all();
     GroupData groupData = new GroupData().withName("some_group");
     File file = new File("src\\test\\resources\\profile-512.jpg");
@@ -33,5 +34,7 @@ public class ContactCreationTestsFileAttachedCheck extends TestBase {
     assertThat(after, equalTo(before.withAdded(
             contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     assertThat(app.contact().checkPicIsAttached(contact), equalTo(true));
+  */
   }
+
 }

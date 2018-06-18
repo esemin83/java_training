@@ -6,9 +6,10 @@ import ru.stqa.train.addressbook.model.Contacts;
 import ru.stqa.train.addressbook.model.Groups;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 
-public class testMethods extends TestBase{
+public class testMethods extends TestBase {
   /*
   @Test(enabled = false)
   public void testGetGroupName(){
@@ -42,6 +43,7 @@ public class testMethods extends TestBase{
     System.out.println("FromUI = " + list.toString());
     //System.out.println(contactList);
   }
+
   @Test
   public void getAbsPath() {
     File someFile = new File(".");
@@ -57,10 +59,14 @@ public class testMethods extends TestBase{
     System.out.println(groups);
     System.out.println(groups.size());
   }
+
   @Test
   public void getContactsFromDB() {
     Contacts cnt = app.db().contacts();
-    System.out.println(cnt);
-    System.out.println(cnt.size());
+    System.out.println("\n" + "size = " + cnt.size());
+    Iterator iterator = cnt.iterator();
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
+    }
   }
 }
