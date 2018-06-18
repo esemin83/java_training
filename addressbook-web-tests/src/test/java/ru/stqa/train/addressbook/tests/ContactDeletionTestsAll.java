@@ -17,6 +17,7 @@ public class ContactDeletionTestsAll extends TestBase {
       app.goTo().HomePage();
       Contacts after = app.db().contacts();
       assertThat(after.size(), equalTo(0));
+      verifyContactListUI();
     }
   }
 }

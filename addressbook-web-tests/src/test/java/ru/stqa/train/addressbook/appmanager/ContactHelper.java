@@ -155,7 +155,7 @@ public class ContactHelper extends HelperBase {
   public void delete(ContactData contact) {
     selectContactById(contact);
     deleteSelectedContact();
-    //contactCache = null;
+    contactCache = null;
   }
 
   public void modify(ContactData contact) {
