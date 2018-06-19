@@ -61,18 +61,17 @@ public class testMethods extends TestBase {
   }
 
   @Test
-  public void getContactsFromDB() {
-    Contacts cnt = app.db().contacts();
-    System.out.println("\n" + "size = " + cnt.size());
-    /*
-    Iterator iterator = cnt.iterator();
-    while (iterator.hasNext()) {
-      System.out.println(iterator.next().toString());
-    }
-    */
-    for (ContactData contact : cnt) {
-      System.out.println("\n" + "contact = " + contact);
-      System.out.println("\n" + "groups = " + contact.getGroups());
+  public void getContactsInGroups() {
+    Contacts contacts = app.db().contacts();
+    Contacts cntInGroups = contacts.contactsInGroup();
+    System.out.println("cntInGroups = " + cntInGroups);
+  }
+
+    @Test
+    public void getContactsNotInGroups() {
+      Contacts contacts = app.db().contacts();
+      Contacts cntNotInGroup = contacts.contactsNotInGroup();
+      System.out.println("cntNotInGroup = " + cntNotInGroup);
     }
   }
-}
+
