@@ -71,10 +71,13 @@ public class ContactCreationTestsCreationAddContactToGroup extends TestBase {
             contacts_after.stream()
                     .filter((ContactData q) -> q.getId() == cntToAdd.getId()).collect(Collectors.toCollection(Contacts::new));
     System.out.println("addedContact = " + addedContact);
-    assertThat(addedContact.iterator().next().getGroups(), equalTo(grpToAdd));
 
-
-
+    Groups groupsFromContact = addedContact.iterator().next().getGroups();
+    System.out.println(groupsFromContact);
+    Groups some = new Groups();
+    some.add(grpToAdd);
+    System.out.println(grpToAdd);
+    assertThat((addedContact.iterator().next().getGroups()), equalTo(some));
   }
 }
 
