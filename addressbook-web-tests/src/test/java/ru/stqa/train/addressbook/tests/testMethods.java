@@ -64,9 +64,15 @@ public class testMethods extends TestBase {
   public void getContactsFromDB() {
     Contacts cnt = app.db().contacts();
     System.out.println("\n" + "size = " + cnt.size());
+    /*
     Iterator iterator = cnt.iterator();
     while (iterator.hasNext()) {
-      System.out.println(iterator.next());
+      System.out.println(iterator.next().toString());
+    }
+    */
+    for (ContactData contact : cnt) {
+      System.out.println("\n" + "contact = " + contact);
+      System.out.println("\n" + "groups = " + contact.getGroups());
     }
   }
 }
