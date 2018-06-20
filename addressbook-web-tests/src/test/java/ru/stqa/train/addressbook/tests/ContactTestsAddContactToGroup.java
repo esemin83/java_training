@@ -12,41 +12,50 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactCreationTestsRemoveContactFromGroup extends TestBase {
+public class ContactTestsAddContactToGroup extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     Contacts contacts = app.db().contacts();
-    Groups groups = app.db().groups();
-    Contacts cntInGroup = contacts.contactsInGroup();
     Contacts cntNotInGroup = contacts.contactsNotInGroup();
-
     GroupData newGroup = new GroupData().withName("some_group");
     ContactData newContact = new ContactData().withFirstName("First name")
             .withLastName("Last name").withAddress("Address new").withPhoneHome("84953864656")
             .withEmailFirst("example@mail.com");
 
-    if (contacts.contactsInGroup().size() == 0) {
+    if (app.db().contacts().size() == 0 || cntNotInGroup.size() == 0) {
       app.goTo().HomePage();
       app.contact().create(newContact, false);
     }
-
     if (app.db().groups().size() == 0) {
       app.goTo().GroupPage();
       app.group().create(newGroup);
     }
+    app.goTo().HomePage();
+  }
 
+  @Test
+  public void ContactCreationTestsAddContactToGroup() {
+    // find contacts not in group
+    Groups groups = app.db().groups();
+    Contacts contacts_before = app.db().contacts();
+    Contacts cntNotInGroup = contacts_before.contactsNotInGroup();
+    // select contact and group
     ContactData cntToAdd = cntNotInGroup.iterator().next();
     GroupData grpToAdd = groups.iterator().next();
     // add contact to group
     app.goTo().HomePage();
     app.contact().addContactToGroup(cntToAdd, grpToAdd);
+    //refresh data
+    Contacts contacts_after = app.db().contacts();
+    Contacts addedContact =
+            contacts_after.stream()
+                    .filter((ContactData q) -> q.getId() == cntToAdd.getId())
+                    .collect(Collectors.toCollection(Contacts::new));
+    assertThat(addedContact.iterator().next().getGroups(), equalTo(new Groups().withAdded(grpToAdd)));
     app.goTo().HomePage();
-  }
-
-  @Test
-  public void ContactCreationTestsCreationAddContactToGroup() {
-
+    // UI check
+    assertThat(app.contact().uiCheckContactAddedToGroup(cntToAdd, grpToAdd), equalTo(true));
   }
 }
 
