@@ -180,14 +180,14 @@ public class ContactHelper extends HelperBase {
     new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
     selectContactById(contact);
     click(By.cssSelector("input[name='add']"));
-    isElementPresent(By.xpath("//div[@class='msgbox'][contains(.,'Users added.')]"));
+    Assert.assertTrue(isElementPresent(By.xpath("//div[@class='msgbox'][contains(.,'Users added.')]")));
   }
 
   public void removeContactFromGroup(ContactData contactToDelete, GroupData groupToDelete) {
     new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupToDelete.getName());
     selectContactById(contactToDelete);
     click(By.cssSelector("input[name='remove']"));
-    isElementPresent(By.xpath("//div[@class='msgbox'][contains(.,'Users removed.')]"));
+    Assert.assertTrue(isElementPresent(By.xpath("//div[@class='msgbox'][contains(.,'Users removed.')]")));
   }
 
   public Boolean uiCheckContactAddedToGroup(ContactData cntToAdd, GroupData grpToAdd) {
