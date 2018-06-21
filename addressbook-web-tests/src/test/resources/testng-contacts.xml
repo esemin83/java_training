@@ -3,12 +3,12 @@
 <suite name="Suite1" verbose="1" >
     <test name="Contacts">
         <classes>
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.ContactCreationTests"/>
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.ContactTestsAddContactToGroup"/>
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.ContactCreationTestsFileAttachedCheck"/>
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.ContactModificationTests"/>
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.ContactDeletionTests"/>
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.ContactDeletionTestsAll"/>
+            <class name="ru.stqa.train.addressbook.tests.ContactCreationTests"/>
+            <class name="ru.stqa.train.addressbook.tests.ContactTestsAddContactToGroup"/>
+            <class name="ru.stqa.train.addressbook.tests.ContactCreationTestsFileAttachedCheck"/>
+            <class name="ru.stqa.train.addressbook.tests.ContactModificationTests"/>
+            <class name="ru.stqa.train.addressbook.tests.ContactDeletionTests"/>
+            <class name="ru.stqa.train.addressbook.tests.ContactDeletionTestsAll"/>
         </classes>
     </test>
 </suite>

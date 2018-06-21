@@ -3,10 +3,10 @@
 <suite name="Suite1" verbose="1" >
     <test name="Groups" >
         <classes>
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.GroupCreationTests" />
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.GroupModificationTests" />
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.GroupDeletionTests" />
-            <class name="ru.stqa.train.addressbook.ru.stqa.train.mantis.tests.GroupDeletionTestsAll" />
+            <class name="ru.stqa.train.addressbook.tests.GroupCreationTests" />
+            <class name="ru.stqa.train.addressbook.tests.GroupModificationTests" />
+            <class name="ru.stqa.train.addressbook.tests.GroupDeletionTests" />
+            <class name="ru.stqa.train.addressbook.tests.GroupDeletionTestsAll" />
         </classes>
     </test>
 </suite>
