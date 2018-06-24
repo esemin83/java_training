@@ -20,6 +20,7 @@ public class ApplicationManager {
 
   private String browser;
   private RegistrationHelper registrationHelper;
+  private FtpHelper ftp;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -39,6 +40,13 @@ public class ApplicationManager {
 
   public HttpSession newSession() {
     return new HttpSession(this);
+  }
+
+  public FtpHelper ftp() {
+    if (ftp == null) {
+      ftp = new FtpHelper(this);
+    }
+    return ftp;
   }
 
   public String getProperty(String key) {
