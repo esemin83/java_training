@@ -7,8 +7,6 @@ import java.sql.*;
 
 public class DbHelper {
 
-  //Connection conn = null;
-
   public Users getUserListFromDB() {
     Connection conn = null;
     Users users = new Users();
@@ -24,8 +22,6 @@ public class DbHelper {
       rs.close();
       st.close();
       conn.close();
-      //System.out.println(users);
-      //return users;
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
