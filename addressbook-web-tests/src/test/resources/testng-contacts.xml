@@ -5,6 +5,7 @@
         <classes>
             <class name="ru.stqa.train.addressbook.tests.ContactCreationTests"/>
             <class name="ru.stqa.train.addressbook.tests.ContactTestsAddContactToGroup"/>
+            <class name="ru.stqa.train.addressbook.tests.ContactTestsRemoveContactFromGroup"/>
             <class name="ru.stqa.train.addressbook.tests.ContactCreationTestsFileAttachedCheck"/>
             <class name="ru.stqa.train.addressbook.tests.ContactModificationTests"/>
             <class name="ru.stqa.train.addressbook.tests.ContactDeletionTests"/>
