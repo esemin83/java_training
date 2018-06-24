@@ -24,18 +24,25 @@ public class ChangePasswordTests extends TestBase {
   @Test
   public void testChangePassword() throws IOException, MessagingException, InterruptedException {
     Users userListFromDB = app.db().getUserListFromDB();
-    //System.out.println("\n" + "userListFromDB = " + userListFromDB + "\n");
-
+    String newPassword = "e" + randomInt(0, 10000) + "y";
     UserData userToReset = userListFromDB.iterator().next();
+    System.out.println("\n" + "userToReset" + userToReset + "\n");
     app.registration().resetPwdByAdmin(userToReset);
-    Thread.sleep(10000);
-
+    List<MailMessage> mailMessages = app.mail().waitForMail(1, 20000);
+    System.out.println("\n" + "mailMessages" + mailMessages + "\n");
+    String confirmationLink = findConfirmationLink(mailMessages, userToReset.getMail());
+    app.registration().finish(confirmationLink, newPassword);
+    assertTrue(app.newSession().login(userToReset.getUserName(), newPassword));
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
     MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-    VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
+    VerbalExpression regex = VerbalExpression.regex().find("http://localhost/mantisbt-1.2.19/verify.php").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
+  }
+
+  private int randomInt(int min, int max) {
+    return min + (int) (Math.random() * ((max - min) + 1));
   }
 
   @AfterMethod(alwaysRun = true)

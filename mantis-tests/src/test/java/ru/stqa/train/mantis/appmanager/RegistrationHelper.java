@@ -2,7 +2,6 @@ package ru.stqa.train.mantis.appmanager;
 
 import org.openqa.selenium.By;
 import ru.stqa.train.mantis.model.UserData;
-import ru.stqa.train.mantis.model.Users;
 
 public class RegistrationHelper extends HelperBase {
 
@@ -24,19 +23,21 @@ public class RegistrationHelper extends HelperBase {
     click(By.xpath("//input[@value='Update User']"));
   }
 
-  public void resetPwdByAdmin(UserData user) {
+  public void resetPwdByAdmin(UserData user) throws InterruptedException {
     loginAsAdmin();
     // go to users manage page //
-    click(By.xpath("//a[contains(.,'Manage')]"));
+    click(By.xpath("//td//a[contains(.,'Manage')]"));
     click(By.xpath("//a[contains(.,'Manage Users')]"));
     // select user by id //
     selectUserById(user.getId());
     // reset //
     click(By.xpath("//input[@value='Reset Password']"));
+    // logout
+    click(By.xpath("//a[contains(.,'Logout')]"));
   }
 
   private void selectUserById(int id) {
-    click(By.cssSelector(String.format("a[href$='%s']", id)));
+    click(By.cssSelector(String.format("a[href$='user_id=%s']", id)));
   }
 
   private void loginAsAdmin() {
@@ -45,4 +46,5 @@ public class RegistrationHelper extends HelperBase {
     type(By.name("password"), app.getProperty("web.adminPassword"));
     click(By.xpath("//input[@value='Login']"));
   }
+
 }

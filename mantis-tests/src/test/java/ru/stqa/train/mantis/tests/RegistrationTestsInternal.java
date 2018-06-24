@@ -22,9 +22,12 @@ public class RegistrationTestsInternal extends TestBase {
   @Test
   public void testRegistration() throws IOException, MessagingException {
     long now = System.currentTimeMillis();
+    //int randomInt = randomInt(0, 10);
     String user = String.format("user%s", now);
+    //String user = String.format("user%s", randomInt);
     String password = "password";
     String email = String.format("user%s@mail.com", now);
+    //String email = String.format("user%s@mail.com", randomInt);
     app.registration().start(user, email);
     List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
@@ -36,6 +39,10 @@ public class RegistrationTestsInternal extends TestBase {
     MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
     VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
+  }
+
+  private int randomInt(int min, int max) {
+    return min + (int) (Math.random() * ((max - min) + 1));
   }
 
   @AfterMethod(alwaysRun = true)
