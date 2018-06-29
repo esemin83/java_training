@@ -2,7 +2,6 @@ package ru.train.soap;
 
 import com.cdyne.ws.IP2Geo;
 import com.cdyne.ws.IPInformation;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
