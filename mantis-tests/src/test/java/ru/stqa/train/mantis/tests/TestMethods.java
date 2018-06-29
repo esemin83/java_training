@@ -6,7 +6,10 @@ import org.testng.annotations.Test;
 import ru.stqa.train.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class TestMethods extends TestBase {
@@ -32,6 +35,12 @@ public class TestMethods extends TestBase {
   public void testGetMail() throws IOException, MessagingException {
     List<MailMessage> mailMessages = app.mail().waitForMail(2, 100000);
     System.out.println("\n" + "mailMessages = " + mailMessages + "\n");
+  }
+
+  @Test
+  public void getIssueStatus() throws RemoteException, ServiceException, MalformedURLException {
+    boolean isIssueOpen = app.api().isIssueOpen(9);
+    System.out.println("isIssueOpen " + isIssueOpen);
   }
 
   @AfterMethod(alwaysRun = true)
