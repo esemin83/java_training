@@ -30,12 +30,8 @@ public class TestBase {
     app.stop();
   }
 
-  public boolean isIssueOpen(int issueId) throws RemoteException, ServiceException, MalformedURLException {
-    return app.api().isIssueOpen(issueId);
-  }
-
   public void skipIfNotFixed(int issueId) throws RemoteException, ServiceException, MalformedURLException {
-    if (isIssueOpen(issueId)) {
+    if (app.api().isIssueOpen(issueId)) {
       throw new SkipException("Ignored because of issue " + issueId);
     }
   }
