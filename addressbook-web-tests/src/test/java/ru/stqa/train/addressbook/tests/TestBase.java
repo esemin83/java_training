@@ -1,8 +1,10 @@
 package ru.stqa.train.addressbook.tests;
 
+import org.hibernate.service.spi.ServiceException;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +15,10 @@ import ru.stqa.train.addressbook.model.Contacts;
 import ru.stqa.train.addressbook.model.GroupData;
 import ru.stqa.train.addressbook.model.Groups;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -71,6 +76,12 @@ public class TestBase {
                       .withLastName(b.getLastname()).withAddress(b.getAddress())).collect(Collectors.toSet())));
       System.out.println("Check UI verify");
     }
-
   }
+
+  public void skipIfNotFixed(int issueId) throws IOException {
+    if (app.rst().isIssueOpen(issueId)) {
+      throw new SkipException("Ignored because of issue " + issueId);
+    }
+  }
+
 }

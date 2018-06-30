@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,8 +40,8 @@ public class ContactCreationTests extends TestBase {
   }
 
   @Test(dataProvider = "contactsFromFileJSON")
-  public void testContactCreation1(ContactData contact) {
-
+  public void testContactCreation1(ContactData contact) throws IOException {
+    skipIfNotFixed(3);
     Contacts before = app.db().contacts();
     app.contact().create(contact, false);
     app.goTo().HomePage();

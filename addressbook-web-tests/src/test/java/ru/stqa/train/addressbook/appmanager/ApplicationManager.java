@@ -24,6 +24,7 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private String browser;
   private DbHelper dbHelper;
+  private BugifyRestHelper bugifyRestHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -67,5 +68,12 @@ public class ApplicationManager {
   }
 
   public DbHelper db(){return dbHelper;}
+
+  public BugifyRestHelper rst() {
+    if (bugifyRestHelper == null) {
+      bugifyRestHelper = new BugifyRestHelper(this);
+    }
+    return bugifyRestHelper;
+  }
 
 }
