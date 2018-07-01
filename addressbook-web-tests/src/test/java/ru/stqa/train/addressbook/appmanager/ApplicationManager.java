@@ -76,4 +76,8 @@ public class ApplicationManager {
     return bugifyRestHelper;
   }
 
+  public String getProperty(String key) {
+    return properties.getProperty(key);
+  }
+
 }

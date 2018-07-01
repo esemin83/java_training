@@ -21,11 +21,13 @@ public class BugifyRestHelper {
   }
 
   private Executor getExecutor() {
-    return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
+    //return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
+    return Executor.newInstance().auth(app.getProperty("bugify.username"), app.getProperty("bugify.password"));
   }
 
   public Set<Issue> getIssues() throws IOException {
-    String value = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues.json")).returnContent().asString();
+    //String value = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues.json")).returnContent().asString();
+    String value = getExecutor().execute(Request.Get(app.getProperty("bugify.address") + "/api/issues.json")).returnContent().asString();
     JsonElement parsed = new JsonParser().parse(value);
     JsonElement issues = parsed.getAsJsonObject().get("issues");
     return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {}.getType());
